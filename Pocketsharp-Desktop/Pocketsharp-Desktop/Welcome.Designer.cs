@@ -30,12 +30,20 @@
         {
             TabBar = new TabControl();
             WelcomeTab = new TabPage();
+            StatusTextBox = new RichTextBox();
             AuthenticationTab = new TabPage();
             CollectionTab = new TabPage();
             SetupTab = new TabPage();
-            StatusTextBox = new RichTextBox();
+            groupBox1 = new GroupBox();
+            BaseUrlTextBox = new TextBox();
+            groupBox2 = new GroupBox();
+            UsernameTextBox = new TextBox();
+            PasswordTextBox = new TextBox();
             TabBar.SuspendLayout();
             WelcomeTab.SuspendLayout();
+            SetupTab.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // TabBar
@@ -61,6 +69,15 @@
             WelcomeTab.Text = "Welcome";
             WelcomeTab.UseVisualStyleBackColor = true;
             // 
+            // StatusTextBox
+            // 
+            StatusTextBox.Dock = DockStyle.Fill;
+            StatusTextBox.Location = new Point(3, 3);
+            StatusTextBox.Name = "StatusTextBox";
+            StatusTextBox.Size = new Size(446, 403);
+            StatusTextBox.TabIndex = 0;
+            StatusTextBox.Text = "";
+            // 
             // AuthenticationTab
             // 
             AuthenticationTab.Location = new Point(4, 24);
@@ -83,6 +100,8 @@
             // 
             // SetupTab
             // 
+            SetupTab.Controls.Add(groupBox2);
+            SetupTab.Controls.Add(groupBox1);
             SetupTab.Location = new Point(4, 24);
             SetupTab.Name = "SetupTab";
             SetupTab.Padding = new Padding(3);
@@ -91,14 +110,47 @@
             SetupTab.Text = "Setup";
             SetupTab.UseVisualStyleBackColor = true;
             // 
-            // StatusTextBox
+            // groupBox1
             // 
-            StatusTextBox.Dock = DockStyle.Fill;
-            StatusTextBox.Location = new Point(3, 3);
-            StatusTextBox.Name = "StatusTextBox";
-            StatusTextBox.Size = new Size(446, 403);
-            StatusTextBox.TabIndex = 0;
-            StatusTextBox.Text = "";
+            groupBox1.Controls.Add(BaseUrlTextBox);
+            groupBox1.Location = new Point(6, 6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(440, 60);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "BaseURL";
+            // 
+            // BaseUrlTextBox
+            // 
+            BaseUrlTextBox.Location = new Point(6, 22);
+            BaseUrlTextBox.Name = "BaseUrlTextBox";
+            BaseUrlTextBox.Size = new Size(428, 23);
+            BaseUrlTextBox.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(PasswordTextBox);
+            groupBox2.Controls.Add(UsernameTextBox);
+            groupBox2.Location = new Point(6, 72);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(440, 88);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Userdata";
+            // 
+            // UsernameTextBox
+            // 
+            UsernameTextBox.Location = new Point(6, 22);
+            UsernameTextBox.Name = "UsernameTextBox";
+            UsernameTextBox.Size = new Size(428, 23);
+            UsernameTextBox.TabIndex = 0;
+            // 
+            // PasswordTextBox
+            // 
+            PasswordTextBox.Location = new Point(6, 51);
+            PasswordTextBox.Name = "PasswordTextBox";
+            PasswordTextBox.Size = new Size(428, 23);
+            PasswordTextBox.TabIndex = 1;
             // 
             // Welcome
             // 
@@ -113,6 +165,11 @@
             Load += Welcome_Load;
             TabBar.ResumeLayout(false);
             WelcomeTab.ResumeLayout(false);
+            SetupTab.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -124,5 +181,10 @@
         private TabPage CollectionTab;
         private TabPage SetupTab;
         private RichTextBox StatusTextBox;
+        private GroupBox groupBox1;
+        private TextBox BaseUrlTextBox;
+        private GroupBox groupBox2;
+        private TextBox UsernameTextBox;
+        private TextBox PasswordTextBox;
     }
 }
