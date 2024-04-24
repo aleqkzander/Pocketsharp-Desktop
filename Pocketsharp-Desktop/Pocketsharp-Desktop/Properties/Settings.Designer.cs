@@ -26,60 +26,12 @@ namespace Pocketsharp_Desktop.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string BaseURL {
+        public string JsonUserData {
             get {
-                return ((string)(this["BaseURL"]));
+                return ((string)(this["JsonUserData"]));
             }
             set {
-                this["BaseURL"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Username {
-            get {
-                return ((string)(this["Username"]));
-            }
-            set {
-                this["Username"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Password {
-            get {
-                return ((string)(this["Password"]));
-            }
-            set {
-                this["Password"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string JsonAuthRecord {
-            get {
-                return ((string)(this["JsonAuthRecord"]));
-            }
-            set {
-                this["JsonAuthRecord"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string JsonAuthResponse {
-            get {
-                return ((string)(this["JsonAuthResponse"]));
-            }
-            set {
-                this["JsonAuthResponse"] = value;
+                this["JsonUserData"] = value;
             }
         }
     }

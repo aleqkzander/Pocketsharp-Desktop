@@ -1,14 +1,11 @@
+using Pocketsharp_Desktop.Objects;
 using Pocketsharp_Desktop.Utility;
 
 namespace Pocketsharp_Desktop
 {
     public partial class Welcome : Form
     {
-        string? _baseurl;
-        string? _username;
-        string? _password;
-        string? _jsonAuthRecord;
-        string? _jsonAuthResponse;
+        UserData? _userData;
 
         public Welcome()
         {
@@ -22,36 +19,32 @@ namespace Pocketsharp_Desktop
 
         private void LoadAndAssignSavedValues()
         {
-            _baseurl = Properties.Settings.Default.BaseURL;
-            _username = Properties.Settings.Default.Username;
-            _password = Properties.Settings.Default.Password;
-            _jsonAuthRecord = Properties.Settings.Default.JsonAuthRecord;
-            _jsonAuthResponse = Properties.Settings.Default.JsonAuthResponse;
+            _userData = JsonHandler.ConvertJsonStringToUserData(Properties.Settings.Default.JsonUserData);
 
-            if (string.IsNullOrEmpty(_baseurl))
+            if (string.IsNullOrEmpty(_userData?.BaseUrl))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a base url in the setup tab");
-                TextBoxUtility.SetupTextBox(BaseUrlTextBox, "Enter your base url", _baseurl);
+                TextBoxUtility.SetupTextBox(BaseUrlTextBox, "Enter your base url", _userData?.BaseUrl);
             }
 
-            if (string.IsNullOrEmpty(_username))
+            if (string.IsNullOrEmpty(_userData?.Username))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a username in the setup tab");
-                TextBoxUtility.SetupTextBox(UsernameTextBox, "Enter your username", _username);
+                TextBoxUtility.SetupTextBox(UsernameTextBox, "Enter your username", _userData?.Username);
             }
 
-            if (string.IsNullOrEmpty(_password))
+            if (string.IsNullOrEmpty(_userData?.Password))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a password in the setup tab");
-                TextBoxUtility.SetupTextBox(PasswordTextBox, "Enter your password", _password);
+                TextBoxUtility.SetupTextBox(PasswordTextBox, "Enter your password", _userData?.Password);
             }
 
-            if (string.IsNullOrEmpty(_jsonAuthRecord))
+            if (string.IsNullOrEmpty(_userData?.JsonAuthRecord))
             {
                 TextBoxUtility.AddINFOEntry(StatusTextBox, "No auth record found");
             }
 
-            if (string.IsNullOrEmpty(_jsonAuthResponse))
+            if (string.IsNullOrEmpty(_userData?.JsonAuthResponse))
             {
                 TextBoxUtility.AddINFOEntry(StatusTextBox, "No auth response found");
             }
