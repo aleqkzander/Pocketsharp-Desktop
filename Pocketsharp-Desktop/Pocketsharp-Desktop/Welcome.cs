@@ -5,6 +5,7 @@ namespace Pocketsharp_Desktop
 {
     public partial class Welcome : Form
     {
+        HttpClient _client = new();
         UserData _userData = JsonHandler.ConvertJsonStringToUserData(Properties.Settings.Default.JsonUserData);
 
         public Welcome()
@@ -36,6 +37,10 @@ namespace Pocketsharp_Desktop
         {
             if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(BaseUrlTextBox.Text)) return;
             _userData.BaseUrl = BaseUrlTextBox.Text;
+
+            // setup the base url
+            _client.BaseAddress = new Uri(_userData.BaseUrl);
+            
             Properties.Settings.Default.Save();
 
             _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
@@ -68,7 +73,6 @@ namespace Pocketsharp_Desktop
 
         private void AuthenticationRegisterUserButton_Click(object sender, EventArgs e)
         {
-
         }
 
         private void AuthenticationLoginUserButton_Click(object sender, EventArgs e)
@@ -82,6 +86,16 @@ namespace Pocketsharp_Desktop
         }
 
         private void AuthenticationDeleteUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationUploadPictureButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationDeletePictureButton_Click(object sender, EventArgs e)
         {
 
         }
