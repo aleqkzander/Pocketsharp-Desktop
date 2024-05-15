@@ -36,6 +36,7 @@ namespace Pocketsharp_Desktop
         {
             if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(BaseUrlTextBox.Text)) return;
             _userData.BaseUrl = BaseUrlTextBox.Text;
+            Properties.Settings.Default.Save();
 
             _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
         }
@@ -44,6 +45,7 @@ namespace Pocketsharp_Desktop
         {
             if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(UsernameTextBox.Text)) return;
             _userData.Username = UsernameTextBox.Text;
+            Properties.Settings.Default.Save();
 
             _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
         }
@@ -52,6 +54,7 @@ namespace Pocketsharp_Desktop
         {
             if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(PasswordTextBox.Text)) return;
             _userData.Password = PasswordTextBox.Text;
+            Properties.Settings.Default.Save();
 
             _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
         }

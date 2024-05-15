@@ -36,6 +36,7 @@ namespace Pocketsharp_Desktop.Objects
                 return;
             }
 
+            // from this point on all required information was provided
             Validated = true;
 
             if (string.IsNullOrEmpty(JsonAuthRecord))
