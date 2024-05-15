@@ -5,49 +5,55 @@ namespace Pocketsharp_Desktop
 {
     public partial class Welcome : Form
     {
-        UserData? _userData;
+        UserData _userData = JsonHandler.ConvertJsonStringToUserData(Properties.Settings.Default.JsonUserData);
 
         public Welcome()
         {
             InitializeComponent();
+
+            TabBar.SelectedIndexChanged += TabBar_OnIndexChanged;
+            BaseUrlTextBox.KeyUp += BaseUrlTextBox_OnEnterPressed;
+            UsernameTextBox.KeyUp += UsernameTextBox_OnEnterPressed;
+            PasswordTextBox.KeyUp += PasswordTextBox_OnEnterPressed;
         }
 
         private void Welcome_Load(object sender, EventArgs e)
         {
-            LoadAndAssignSavedValues();
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
         }
 
-        private void LoadAndAssignSavedValues()
+        private void TabBar_OnIndexChanged(object? sender, EventArgs e)
         {
-            _userData = JsonHandler.ConvertJsonStringToUserData(Properties.Settings.Default.JsonUserData);
+            // allow the user to enter the welcome tab at anytime
+            if (TabBar.SelectedTab == WelcomeTab) return;
 
-            if (string.IsNullOrEmpty(_userData?.BaseUrl))
-            {
-                TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a base url in the setup tab");
-                TextBoxUtility.SetupTextBox(BaseUrlTextBox, "Enter your base url", _userData?.BaseUrl);
-            }
+            // check if the user has provided all required information otherwise redirect to the setup tab
+            if (_userData?.Validated == false) 
+                TabBar.SelectTab(SetupTab);
+        }
 
-            if (string.IsNullOrEmpty(_userData?.Username))
-            {
-                TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a username in the setup tab");
-                TextBoxUtility.SetupTextBox(UsernameTextBox, "Enter your username", _userData?.Username);
-            }
+        private void BaseUrlTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(BaseUrlTextBox.Text)) return;
+            _userData.BaseUrl = BaseUrlTextBox.Text;
 
-            if (string.IsNullOrEmpty(_userData?.Password))
-            {
-                TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a password in the setup tab");
-                TextBoxUtility.SetupTextBox(PasswordTextBox, "Enter your password", _userData?.Password);
-            }
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
+        }
 
-            if (string.IsNullOrEmpty(_userData?.JsonAuthRecord))
-            {
-                TextBoxUtility.AddINFOEntry(StatusTextBox, "No auth record found");
-            }
+        private void UsernameTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(UsernameTextBox.Text)) return;
+            _userData.Username = UsernameTextBox.Text;
 
-            if (string.IsNullOrEmpty(_userData?.JsonAuthResponse))
-            {
-                TextBoxUtility.AddINFOEntry(StatusTextBox, "No auth response found");
-            }
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
+        }
+
+        private void PasswordTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(PasswordTextBox.Text)) return;
+            _userData.Password = PasswordTextBox.Text;
+
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
         }
     }
 }

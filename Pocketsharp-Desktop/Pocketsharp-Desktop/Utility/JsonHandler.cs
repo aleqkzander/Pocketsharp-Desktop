@@ -5,16 +5,16 @@ namespace Pocketsharp_Desktop.Utility
 {
     internal class JsonHandler
     {
-        public static string? ConvertUserDataToJsonString(UserData userdata)
+        public static string ConvertUserDataToJsonString(UserData userdata)
         {
-            if (userdata == null) return null;
-            return JsonSerializer.Serialize(userdata);
+            try { return JsonSerializer.Serialize(userdata); }
+            catch { return string.Empty; }
         }
 
-        public static UserData? ConvertJsonStringToUserData(string jsonuserdata)
+        public static UserData ConvertJsonStringToUserData(string jsonuserdata)
         {
-            if (string.IsNullOrEmpty(jsonuserdata)) return null;
-            return JsonSerializer.Deserialize<UserData>(jsonuserdata);
+            try { return JsonSerializer.Deserialize<UserData>(jsonuserdata)!; }
+            catch { return new(); }
         }
     }
 }

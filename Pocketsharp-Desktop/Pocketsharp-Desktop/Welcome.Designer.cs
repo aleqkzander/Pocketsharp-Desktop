@@ -34,16 +34,16 @@
             AuthenticationTab = new TabPage();
             CollectionTab = new TabPage();
             SetupTab = new TabPage();
+            groupBox2 = new GroupBox();
+            PasswordTextBox = new TextBox();
+            UsernameTextBox = new TextBox();
             groupBox1 = new GroupBox();
             BaseUrlTextBox = new TextBox();
-            groupBox2 = new GroupBox();
-            UsernameTextBox = new TextBox();
-            PasswordTextBox = new TextBox();
             TabBar.SuspendLayout();
             WelcomeTab.SuspendLayout();
             SetupTab.SuspendLayout();
-            groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // TabBar
@@ -74,9 +74,11 @@
             StatusTextBox.Dock = DockStyle.Fill;
             StatusTextBox.Location = new Point(3, 3);
             StatusTextBox.Name = "StatusTextBox";
+            StatusTextBox.ReadOnly = true;
             StatusTextBox.Size = new Size(446, 403);
             StatusTextBox.TabIndex = 0;
             StatusTextBox.Text = "";
+            StatusTextBox.ZoomFactor = 1.5F;
             // 
             // AuthenticationTab
             // 
@@ -110,6 +112,31 @@
             SetupTab.Text = "Setup";
             SetupTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(PasswordTextBox);
+            groupBox2.Controls.Add(UsernameTextBox);
+            groupBox2.Location = new Point(6, 72);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(440, 88);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Userdata";
+            // 
+            // PasswordTextBox
+            // 
+            PasswordTextBox.Location = new Point(6, 51);
+            PasswordTextBox.Name = "PasswordTextBox";
+            PasswordTextBox.Size = new Size(428, 23);
+            PasswordTextBox.TabIndex = 1;
+            // 
+            // UsernameTextBox
+            // 
+            UsernameTextBox.Location = new Point(6, 22);
+            UsernameTextBox.Name = "UsernameTextBox";
+            UsernameTextBox.Size = new Size(428, 23);
+            UsernameTextBox.TabIndex = 0;
+            // 
             // groupBox1
             // 
             groupBox1.Controls.Add(BaseUrlTextBox);
@@ -127,31 +154,6 @@
             BaseUrlTextBox.Size = new Size(428, 23);
             BaseUrlTextBox.TabIndex = 0;
             // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(PasswordTextBox);
-            groupBox2.Controls.Add(UsernameTextBox);
-            groupBox2.Location = new Point(6, 72);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(440, 88);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Userdata";
-            // 
-            // UsernameTextBox
-            // 
-            UsernameTextBox.Location = new Point(6, 22);
-            UsernameTextBox.Name = "UsernameTextBox";
-            UsernameTextBox.Size = new Size(428, 23);
-            UsernameTextBox.TabIndex = 0;
-            // 
-            // PasswordTextBox
-            // 
-            PasswordTextBox.Location = new Point(6, 51);
-            PasswordTextBox.Name = "PasswordTextBox";
-            PasswordTextBox.Size = new Size(428, 23);
-            PasswordTextBox.TabIndex = 1;
-            // 
             // Welcome
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -166,10 +168,10 @@
             TabBar.ResumeLayout(false);
             WelcomeTab.ResumeLayout(false);
             SetupTab.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
