@@ -28,7 +28,7 @@ namespace Pocketsharp_Desktop
             if (TabBar.SelectedTab == WelcomeTab) return;
 
             // check if the user has provided all required information otherwise redirect to the setup tab
-            if (_userData?.Validated == false) 
+            if (_userData?.Validated == false)
                 TabBar.SelectTab(SetupTab);
         }
 
@@ -57,6 +57,33 @@ namespace Pocketsharp_Desktop
             Properties.Settings.Default.Save();
 
             _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
+        }
+
+        private void SetupDeleteSavedButton_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            MessageBox.Show("Your data was deleted. Please restart the application.");
+            Application.Exit();
+        }
+
+        private void AuthenticationRegisterUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationLoginUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationUpdateUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationDeleteUserButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

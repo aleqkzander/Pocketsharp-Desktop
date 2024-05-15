@@ -32,8 +32,14 @@
             WelcomeTab = new TabPage();
             StatusTextBox = new RichTextBox();
             AuthenticationTab = new TabPage();
+            groupBox3 = new GroupBox();
+            AuthenticationDeleteUserButton = new Button();
+            AuthenticationUpdateUserButton = new Button();
+            AuthenticationLoginUserButton = new Button();
+            AuthenticationRegisterUserButton = new Button();
             CollectionTab = new TabPage();
             SetupTab = new TabPage();
+            SetupDeleteSavedButton = new Button();
             groupBox2 = new GroupBox();
             PasswordTextBox = new TextBox();
             UsernameTextBox = new TextBox();
@@ -41,6 +47,8 @@
             BaseUrlTextBox = new TextBox();
             TabBar.SuspendLayout();
             WelcomeTab.SuspendLayout();
+            AuthenticationTab.SuspendLayout();
+            groupBox3.SuspendLayout();
             SetupTab.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -82,6 +90,7 @@
             // 
             // AuthenticationTab
             // 
+            AuthenticationTab.Controls.Add(groupBox3);
             AuthenticationTab.Location = new Point(4, 24);
             AuthenticationTab.Name = "AuthenticationTab";
             AuthenticationTab.Padding = new Padding(3);
@@ -89,6 +98,59 @@
             AuthenticationTab.TabIndex = 1;
             AuthenticationTab.Text = "Authentication";
             AuthenticationTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(AuthenticationDeleteUserButton);
+            groupBox3.Controls.Add(AuthenticationUpdateUserButton);
+            groupBox3.Controls.Add(AuthenticationLoginUserButton);
+            groupBox3.Controls.Add(AuthenticationRegisterUserButton);
+            groupBox3.Location = new Point(6, 6);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(440, 145);
+            groupBox3.TabIndex = 0;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Control";
+            // 
+            // AuthenticationDeleteUserButton
+            // 
+            AuthenticationDeleteUserButton.Location = new Point(6, 109);
+            AuthenticationDeleteUserButton.Name = "AuthenticationDeleteUserButton";
+            AuthenticationDeleteUserButton.Size = new Size(428, 23);
+            AuthenticationDeleteUserButton.TabIndex = 3;
+            AuthenticationDeleteUserButton.Text = "User delete";
+            AuthenticationDeleteUserButton.UseVisualStyleBackColor = true;
+            AuthenticationDeleteUserButton.Click += AuthenticationDeleteUserButton_Click;
+            // 
+            // AuthenticationUpdateUserButton
+            // 
+            AuthenticationUpdateUserButton.Location = new Point(6, 80);
+            AuthenticationUpdateUserButton.Name = "AuthenticationUpdateUserButton";
+            AuthenticationUpdateUserButton.Size = new Size(428, 23);
+            AuthenticationUpdateUserButton.TabIndex = 2;
+            AuthenticationUpdateUserButton.Text = "User update";
+            AuthenticationUpdateUserButton.UseVisualStyleBackColor = true;
+            AuthenticationUpdateUserButton.Click += AuthenticationUpdateUserButton_Click;
+            // 
+            // AuthenticationLoginUserButton
+            // 
+            AuthenticationLoginUserButton.Location = new Point(6, 51);
+            AuthenticationLoginUserButton.Name = "AuthenticationLoginUserButton";
+            AuthenticationLoginUserButton.Size = new Size(428, 23);
+            AuthenticationLoginUserButton.TabIndex = 1;
+            AuthenticationLoginUserButton.Text = "User login";
+            AuthenticationLoginUserButton.UseVisualStyleBackColor = true;
+            AuthenticationLoginUserButton.Click += AuthenticationLoginUserButton_Click;
+            // 
+            // AuthenticationRegisterUserButton
+            // 
+            AuthenticationRegisterUserButton.Location = new Point(6, 22);
+            AuthenticationRegisterUserButton.Name = "AuthenticationRegisterUserButton";
+            AuthenticationRegisterUserButton.Size = new Size(428, 23);
+            AuthenticationRegisterUserButton.TabIndex = 0;
+            AuthenticationRegisterUserButton.Text = "User register";
+            AuthenticationRegisterUserButton.UseVisualStyleBackColor = true;
+            AuthenticationRegisterUserButton.Click += AuthenticationRegisterUserButton_Click;
             // 
             // CollectionTab
             // 
@@ -102,6 +164,7 @@
             // 
             // SetupTab
             // 
+            SetupTab.Controls.Add(SetupDeleteSavedButton);
             SetupTab.Controls.Add(groupBox2);
             SetupTab.Controls.Add(groupBox1);
             SetupTab.Location = new Point(4, 24);
@@ -111,6 +174,16 @@
             SetupTab.TabIndex = 3;
             SetupTab.Text = "Setup";
             SetupTab.UseVisualStyleBackColor = true;
+            // 
+            // SetupDeleteSavedButton
+            // 
+            SetupDeleteSavedButton.Location = new Point(317, 380);
+            SetupDeleteSavedButton.Name = "SetupDeleteSavedButton";
+            SetupDeleteSavedButton.Size = new Size(129, 23);
+            SetupDeleteSavedButton.TabIndex = 2;
+            SetupDeleteSavedButton.Text = "Delete saved data";
+            SetupDeleteSavedButton.UseVisualStyleBackColor = true;
+            SetupDeleteSavedButton.Click += SetupDeleteSavedButton_Click;
             // 
             // groupBox2
             // 
@@ -167,6 +240,8 @@
             Load += Welcome_Load;
             TabBar.ResumeLayout(false);
             WelcomeTab.ResumeLayout(false);
+            AuthenticationTab.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
             SetupTab.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
@@ -188,5 +263,11 @@
         private GroupBox groupBox2;
         private TextBox UsernameTextBox;
         private TextBox PasswordTextBox;
+        private GroupBox groupBox3;
+        private Button AuthenticationRegisterUserButton;
+        private Button AuthenticationLoginUserButton;
+        private Button AuthenticationDeleteUserButton;
+        private Button AuthenticationUpdateUserButton;
+        private Button SetupDeleteSavedButton;
     }
 }
