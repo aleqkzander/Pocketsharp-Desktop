@@ -21,7 +21,7 @@ namespace Pocketsharp_Desktop
         private void Welcome_Load(object sender, EventArgs e)
         {
             SetupBaseUrlTextBox.Text = _userData.BaseUrl;
-            SetupUsermailTextBox.Text = _userData.Usermail;
+            SetupUsermailTextBox.Text = _userData.Record.Email;
             SetupPasswordTextBox.Text = _userData.Password;
             _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
         }
@@ -50,7 +50,7 @@ namespace Pocketsharp_Desktop
         {
             if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(SetupUsermailTextBox.Text)) return;
 
-            _userData.Usermail = SetupUsermailTextBox.Text;
+            _userData.Record.Email = SetupUsermailTextBox.Text;
             _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
         }
 
@@ -74,8 +74,21 @@ namespace Pocketsharp_Desktop
             Application.Exit();
         }
 
-        private void AuthenticationRegisterUserButton_Click(object sender, EventArgs e)
+        private async void AuthenticationRegisterUserButton_Click(object sender, EventArgs e)
         {
+            _userData.Record.Username = AuthenticationUsernameTextBox.Text;
+            _userData.Record.Name = AuthenticationNameTextBox.Text;
+
+            Pocketsharp.Objects.Record? responseRecord = await Pocketsharp.Authentication.EmailAndPassword.RegisterAsync(_httpClient, _userData.Record, _userData.Password, _userData.Password);
+
+            if (responseRecord != null)
+            {
+                _userData.Record = responseRecord;
+            }
+            else
+            {
+                MessageBox.Show("Failed to receive the response");
+            }
         }
 
         private void AuthenticationLoginUserButton_Click(object sender, EventArgs e)
