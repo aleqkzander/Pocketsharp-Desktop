@@ -52,6 +52,7 @@
             SetupUsermailTextBox = new TextBox();
             groupBox1 = new GroupBox();
             SetupBaseUrlTextBox = new TextBox();
+            SetupSaveDataButton = new Button();
             TabBar.SuspendLayout();
             WelcomeTab.SuspendLayout();
             AuthenticationTab.SuspendLayout();
@@ -253,6 +254,7 @@
             // 
             // SetupTab
             // 
+            SetupTab.Controls.Add(SetupSaveDataButton);
             SetupTab.Controls.Add(SetupDeleteSavedButton);
             SetupTab.Controls.Add(groupBox2);
             SetupTab.Controls.Add(groupBox1);
@@ -319,6 +321,16 @@
             SetupBaseUrlTextBox.Size = new Size(428, 23);
             SetupBaseUrlTextBox.TabIndex = 0;
             // 
+            // SetupSaveDataButton
+            // 
+            SetupSaveDataButton.Location = new Point(6, 380);
+            SetupSaveDataButton.Name = "SetupSaveDataButton";
+            SetupSaveDataButton.Size = new Size(129, 23);
+            SetupSaveDataButton.TabIndex = 3;
+            SetupSaveDataButton.Text = "Save current data";
+            SetupSaveDataButton.UseVisualStyleBackColor = true;
+            SetupSaveDataButton.Click += SetupSaveDataButton_Click;
+            // 
             // Welcome
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -375,5 +387,6 @@
         private PictureBox AuthenticationAvatarBox;
         private Button AuthenticationDeletePictureButton;
         private Button AuthenticationUploadPictureButton;
+        private Button SetupSaveDataButton;
     }
 }

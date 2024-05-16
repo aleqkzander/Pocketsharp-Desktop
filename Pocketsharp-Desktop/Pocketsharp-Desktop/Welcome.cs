@@ -62,6 +62,12 @@ namespace Pocketsharp_Desktop
             _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
         }
 
+        private void SetupSaveDataButton_Click(object sender, EventArgs e)
+        {
+            string jsonUserData = JsonHandler.ConvertUserDataToJsonString(_userData);
+            ConfigUtility.Save(jsonUserData);
+        }
+
         private void SetupDeleteSavedButton_Click(object sender, EventArgs e)
         {
             ConfigUtility.Delete();
