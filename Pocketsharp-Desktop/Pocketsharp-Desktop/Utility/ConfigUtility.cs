@@ -1,4 +1,6 @@
-﻿namespace Pocketsharp_Desktop.Utility
+﻿using Pocketsharp_Desktop.Objects;
+
+namespace Pocketsharp_Desktop.Utility
 {
     internal class ConfigUtility
     {

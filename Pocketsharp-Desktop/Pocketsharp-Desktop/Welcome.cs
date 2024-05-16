@@ -1,28 +1,35 @@
 using Pocketsharp_Desktop.Objects;
 using Pocketsharp_Desktop.Utility;
+using System.Collections;
 
 namespace Pocketsharp_Desktop
 {
     public partial class Welcome : Form
     {
         readonly HttpClient _httpClient = new();
-        readonly UserData _userData = JsonHandler.ConvertJsonStringToUserData(ConfigUtility.Load()) ?? new();
+        readonly UserData _userData = JsonUtility.ConvertJsonStringToUserData(ConfigUtility.Load()) ?? new();
 
         public Welcome()
         {
             InitializeComponent();
-
             TabBar.SelectedIndexChanged += TabBar_OnIndexChanged;
-            SetupBaseUrlTextBox.KeyUp += BaseUrlTextBox_OnEnterPressed;
-            SetupUsermailTextBox.KeyUp += UsernameTextBox_OnEnterPressed;
-            SetupPasswordTextBox.KeyUp += PasswordTextBox_OnEnterPressed;
         }
 
         private void Welcome_Load(object sender, EventArgs e)
         {
             SetupBaseUrlTextBox.Text = _userData.BaseUrl;
+
+            if (_userData.BaseUrl != string.Empty)
+                _httpClient.BaseAddress = new Uri(_userData.BaseUrl);
+
             SetupUsermailTextBox.Text = _userData.Record.Email;
             SetupPasswordTextBox.Text = _userData.Password;
+            AuthenticationUsernameTextBox.Text = _userData.Record.Username;
+            AuthenticationNameTextBox.Text += _userData.Record.Name;
+
+            if (_userData.Record.Avatar.Length != 0)
+                AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(_userData.Record.Avatar);
+
             _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
         }
 
@@ -34,38 +41,22 @@ namespace Pocketsharp_Desktop
                 TabBar.SelectTab(SetupTab);
         }
 
-        private void BaseUrlTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
+        private void SetupSaveDataButton_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(SetupBaseUrlTextBox.Text)) return;
-
             if (NetworkUtility.BaseAddressIsReachable(SetupBaseUrlTextBox.Text))
             {
                 _userData.BaseUrl = SetupBaseUrlTextBox.Text;
                 _httpClient.BaseAddress = new Uri(_userData.BaseUrl);
+
+                _userData.Record.Email = SetupUsermailTextBox.Text;
+                _userData.Password = SetupPasswordTextBox.Text;
                 _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
+                ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
             }
-        }
-
-        private void UsernameTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
-        {
-            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(SetupUsermailTextBox.Text)) return;
-
-            _userData.Record.Email = SetupUsermailTextBox.Text;
-            _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
-        }
-
-        private void PasswordTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
-        {
-            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(SetupPasswordTextBox.Text)) return;
-
-            _userData.Password = SetupPasswordTextBox.Text;
-            _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
-        }
-
-        private void SetupSaveDataButton_Click(object sender, EventArgs e)
-        {
-            string jsonUserData = JsonHandler.ConvertUserDataToJsonString(_userData);
-            ConfigUtility.Save(jsonUserData);
+            else
+            {
+                MessageBox.Show("Failed saving");
+            }
         }
 
         private void SetupDeleteSavedButton_Click(object sender, EventArgs e)
@@ -76,18 +67,23 @@ namespace Pocketsharp_Desktop
 
         private async void AuthenticationRegisterUserButton_Click(object sender, EventArgs e)
         {
-            _userData.Record.Username = AuthenticationUsernameTextBox.Text;
-            _userData.Record.Name = AuthenticationNameTextBox.Text;
-
-            Pocketsharp.Objects.Record? responseRecord = await Pocketsharp.Authentication.EmailAndPassword.RegisterAsync(_httpClient, _userData.Record, _userData.Password, _userData.Password);
-
-            if (responseRecord != null)
+            try
             {
-                _userData.Record = responseRecord;
+                _userData.Record.Username = AuthenticationUsernameTextBox.Text;
+                _userData.Record.Name = AuthenticationNameTextBox.Text;
+
+                if (AuthenticationAvatarBox.Image != null)
+                    _userData.Record.Avatar = ImageUtility.ImageToByteArray(AuthenticationAvatarBox.Image);
+
+                string? jsonResponseObject = await Pocketsharp.Authentication.EmailAndPassword.RegisterAsync(_httpClient, _userData.Record, _userData.Password, _userData.Password);
+
+                if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
+                    ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
             }
-            else
+            catch (Exception exception)
             {
-                MessageBox.Show("Failed to receive the response");
+                MessageBox.Show(exception.ToString());
+                Clipboard.SetText(exception.ToString());
             }
         }
 
@@ -108,12 +104,32 @@ namespace Pocketsharp_Desktop
 
         private void AuthenticationUploadPictureButton_Click(object sender, EventArgs e)
         {
+            OpenFileDialog openFileDialog = new()
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*"
+            };
 
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string filePath = openFileDialog.FileName;
+
+                    using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read);
+                    Image image = Image.FromStream(fileStream);
+
+                    AuthenticationAvatarBox.Image = image;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void AuthenticationDeletePictureButton_Click(object sender, EventArgs e)
         {
-
+            AuthenticationAvatarBox.Image = null;
         }
     }
 }
