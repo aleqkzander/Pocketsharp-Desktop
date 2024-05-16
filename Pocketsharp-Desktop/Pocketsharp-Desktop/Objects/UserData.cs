@@ -11,7 +11,7 @@ namespace Pocketsharp_Desktop.Objects
         public string JsonAuthResponse { get; set; } = string.Empty;
         public bool Validated { get; set; } = false;
 
-        public void Validate(RichTextBox StatusTextBox, TextBox BaseUrlTextBox, TextBox UsernameTextBox, TextBox PasswordTextBox)
+        public void Validate(RichTextBox StatusTextBox, TextBox BaseUrlTextBox, TextBox UsermailTextBox, TextBox PasswordTextBox)
         {
             StatusTextBox.Clear();
 
@@ -23,8 +23,8 @@ namespace Pocketsharp_Desktop.Objects
 
             if (string.IsNullOrEmpty(Usermail))
             {
-                TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a username in the setup tab");
-                TextBoxUtility.SetupTextBox(UsernameTextBox, "Enter your username", Usermail);
+                TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a usermail in the setup tab");
+                TextBoxUtility.SetupTextBox(UsermailTextBox, "Enter your mail", Usermail);
             }
 
             if (string.IsNullOrEmpty(Password))

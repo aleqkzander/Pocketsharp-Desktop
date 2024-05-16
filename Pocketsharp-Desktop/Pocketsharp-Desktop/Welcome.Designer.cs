@@ -46,13 +46,13 @@
             AuthenticationRegisterUserButton = new Button();
             CollectionTab = new TabPage();
             SetupTab = new TabPage();
+            SetupSaveDataButton = new Button();
             SetupDeleteSavedButton = new Button();
             groupBox2 = new GroupBox();
             SetupPasswordTextBox = new TextBox();
             SetupUsermailTextBox = new TextBox();
             groupBox1 = new GroupBox();
             SetupBaseUrlTextBox = new TextBox();
-            SetupSaveDataButton = new Button();
             TabBar.SuspendLayout();
             WelcomeTab.SuspendLayout();
             AuthenticationTab.SuspendLayout();
@@ -266,6 +266,16 @@
             SetupTab.Text = "Setup";
             SetupTab.UseVisualStyleBackColor = true;
             // 
+            // SetupSaveDataButton
+            // 
+            SetupSaveDataButton.Location = new Point(6, 380);
+            SetupSaveDataButton.Name = "SetupSaveDataButton";
+            SetupSaveDataButton.Size = new Size(129, 23);
+            SetupSaveDataButton.TabIndex = 3;
+            SetupSaveDataButton.Text = "Save current data";
+            SetupSaveDataButton.UseVisualStyleBackColor = true;
+            SetupSaveDataButton.Click += SetupSaveDataButton_Click;
+            // 
             // SetupDeleteSavedButton
             // 
             SetupDeleteSavedButton.Location = new Point(317, 380);
@@ -291,6 +301,7 @@
             // 
             SetupPasswordTextBox.Location = new Point(6, 51);
             SetupPasswordTextBox.Name = "SetupPasswordTextBox";
+            SetupPasswordTextBox.PasswordChar = '*';
             SetupPasswordTextBox.PlaceholderText = "Enter your password";
             SetupPasswordTextBox.Size = new Size(428, 23);
             SetupPasswordTextBox.TabIndex = 1;
@@ -320,16 +331,6 @@
             SetupBaseUrlTextBox.PlaceholderText = "Enter your base url";
             SetupBaseUrlTextBox.Size = new Size(428, 23);
             SetupBaseUrlTextBox.TabIndex = 0;
-            // 
-            // SetupSaveDataButton
-            // 
-            SetupSaveDataButton.Location = new Point(6, 380);
-            SetupSaveDataButton.Name = "SetupSaveDataButton";
-            SetupSaveDataButton.Size = new Size(129, 23);
-            SetupSaveDataButton.TabIndex = 3;
-            SetupSaveDataButton.Text = "Save current data";
-            SetupSaveDataButton.UseVisualStyleBackColor = true;
-            SetupSaveDataButton.Click += SetupSaveDataButton_Click;
             // 
             // Welcome
             // 
