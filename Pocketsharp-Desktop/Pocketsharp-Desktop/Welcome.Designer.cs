@@ -32,6 +32,13 @@
             WelcomeTab = new TabPage();
             StatusTextBox = new RichTextBox();
             AuthenticationTab = new TabPage();
+            groupBox4 = new GroupBox();
+            splitContainer1 = new SplitContainer();
+            AuthenticationAvatarBox = new PictureBox();
+            AuthenticationDeletePictureButton = new Button();
+            AuthenticationUploadPictureButton = new Button();
+            AuthenticationNameTextBox = new TextBox();
+            AuthenticationUsernameTextBox = new TextBox();
             groupBox3 = new GroupBox();
             AuthenticationDeleteUserButton = new Button();
             AuthenticationUpdateUserButton = new Button();
@@ -39,32 +46,26 @@
             AuthenticationRegisterUserButton = new Button();
             CollectionTab = new TabPage();
             SetupTab = new TabPage();
+            SetupSaveDataButton = new Button();
             SetupDeleteSavedButton = new Button();
             groupBox2 = new GroupBox();
-            PasswordTextBox = new TextBox();
-            UsernameTextBox = new TextBox();
+            SetupPasswordTextBox = new TextBox();
+            SetupUsermailTextBox = new TextBox();
             groupBox1 = new GroupBox();
-            BaseUrlTextBox = new TextBox();
-            groupBox4 = new GroupBox();
-            AuthenticationEmailTextBox = new TextBox();
-            AuthenticationNameTextBox = new TextBox();
-            splitContainer1 = new SplitContainer();
-            AuthenticationAvatarBox = new PictureBox();
-            AuthenticationUploadPictureButton = new Button();
-            AuthenticationDeletePictureButton = new Button();
+            SetupBaseUrlTextBox = new TextBox();
             TabBar.SuspendLayout();
             WelcomeTab.SuspendLayout();
             AuthenticationTab.SuspendLayout();
-            groupBox3.SuspendLayout();
-            SetupTab.SuspendLayout();
-            groupBox2.SuspendLayout();
-            groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AuthenticationAvatarBox).BeginInit();
+            groupBox3.SuspendLayout();
+            SetupTab.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // TabBar
@@ -112,6 +113,81 @@
             AuthenticationTab.TabIndex = 1;
             AuthenticationTab.Text = "Authentication";
             AuthenticationTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(splitContainer1);
+            groupBox4.Controls.Add(AuthenticationNameTextBox);
+            groupBox4.Controls.Add(AuthenticationUsernameTextBox);
+            groupBox4.Location = new Point(6, 157);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(440, 246);
+            groupBox4.TabIndex = 1;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Additional authentication data";
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.Location = new Point(6, 80);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(AuthenticationAvatarBox);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(AuthenticationDeletePictureButton);
+            splitContainer1.Panel2.Controls.Add(AuthenticationUploadPictureButton);
+            splitContainer1.Size = new Size(428, 160);
+            splitContainer1.SplitterDistance = 131;
+            splitContainer1.TabIndex = 2;
+            // 
+            // AuthenticationAvatarBox
+            // 
+            AuthenticationAvatarBox.Dock = DockStyle.Fill;
+            AuthenticationAvatarBox.Location = new Point(0, 0);
+            AuthenticationAvatarBox.Name = "AuthenticationAvatarBox";
+            AuthenticationAvatarBox.Size = new Size(131, 160);
+            AuthenticationAvatarBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            AuthenticationAvatarBox.TabIndex = 0;
+            AuthenticationAvatarBox.TabStop = false;
+            // 
+            // AuthenticationDeletePictureButton
+            // 
+            AuthenticationDeletePictureButton.Location = new Point(3, 32);
+            AuthenticationDeletePictureButton.Name = "AuthenticationDeletePictureButton";
+            AuthenticationDeletePictureButton.Size = new Size(287, 23);
+            AuthenticationDeletePictureButton.TabIndex = 1;
+            AuthenticationDeletePictureButton.Text = "Delete picture";
+            AuthenticationDeletePictureButton.UseVisualStyleBackColor = true;
+            AuthenticationDeletePictureButton.Click += AuthenticationDeletePictureButton_Click;
+            // 
+            // AuthenticationUploadPictureButton
+            // 
+            AuthenticationUploadPictureButton.Location = new Point(3, 3);
+            AuthenticationUploadPictureButton.Name = "AuthenticationUploadPictureButton";
+            AuthenticationUploadPictureButton.Size = new Size(287, 23);
+            AuthenticationUploadPictureButton.TabIndex = 0;
+            AuthenticationUploadPictureButton.Text = "Upload picture";
+            AuthenticationUploadPictureButton.UseVisualStyleBackColor = true;
+            AuthenticationUploadPictureButton.Click += AuthenticationUploadPictureButton_Click;
+            // 
+            // AuthenticationNameTextBox
+            // 
+            AuthenticationNameTextBox.Location = new Point(6, 51);
+            AuthenticationNameTextBox.Name = "AuthenticationNameTextBox";
+            AuthenticationNameTextBox.PlaceholderText = "Enter your name";
+            AuthenticationNameTextBox.Size = new Size(428, 23);
+            AuthenticationNameTextBox.TabIndex = 1;
+            // 
+            // AuthenticationUsernameTextBox
+            // 
+            AuthenticationUsernameTextBox.Location = new Point(6, 22);
+            AuthenticationUsernameTextBox.Name = "AuthenticationUsernameTextBox";
+            AuthenticationUsernameTextBox.PlaceholderText = "Enter your nickname";
+            AuthenticationUsernameTextBox.Size = new Size(428, 23);
+            AuthenticationUsernameTextBox.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -178,6 +254,7 @@
             // 
             // SetupTab
             // 
+            SetupTab.Controls.Add(SetupSaveDataButton);
             SetupTab.Controls.Add(SetupDeleteSavedButton);
             SetupTab.Controls.Add(groupBox2);
             SetupTab.Controls.Add(groupBox1);
@@ -188,6 +265,16 @@
             SetupTab.TabIndex = 3;
             SetupTab.Text = "Setup";
             SetupTab.UseVisualStyleBackColor = true;
+            // 
+            // SetupSaveDataButton
+            // 
+            SetupSaveDataButton.Location = new Point(6, 380);
+            SetupSaveDataButton.Name = "SetupSaveDataButton";
+            SetupSaveDataButton.Size = new Size(129, 23);
+            SetupSaveDataButton.TabIndex = 3;
+            SetupSaveDataButton.Text = "Save current data";
+            SetupSaveDataButton.UseVisualStyleBackColor = true;
+            SetupSaveDataButton.Click += SetupSaveDataButton_Click;
             // 
             // SetupDeleteSavedButton
             // 
@@ -201,8 +288,8 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(PasswordTextBox);
-            groupBox2.Controls.Add(UsernameTextBox);
+            groupBox2.Controls.Add(SetupPasswordTextBox);
+            groupBox2.Controls.Add(SetupUsermailTextBox);
             groupBox2.Location = new Point(6, 72);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(440, 88);
@@ -210,23 +297,26 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Userdata";
             // 
-            // PasswordTextBox
+            // SetupPasswordTextBox
             // 
-            PasswordTextBox.Location = new Point(6, 51);
-            PasswordTextBox.Name = "PasswordTextBox";
-            PasswordTextBox.Size = new Size(428, 23);
-            PasswordTextBox.TabIndex = 1;
+            SetupPasswordTextBox.Location = new Point(6, 51);
+            SetupPasswordTextBox.Name = "SetupPasswordTextBox";
+            SetupPasswordTextBox.PasswordChar = '*';
+            SetupPasswordTextBox.PlaceholderText = "Enter your password";
+            SetupPasswordTextBox.Size = new Size(428, 23);
+            SetupPasswordTextBox.TabIndex = 1;
             // 
-            // UsernameTextBox
+            // SetupUsermailTextBox
             // 
-            UsernameTextBox.Location = new Point(6, 22);
-            UsernameTextBox.Name = "UsernameTextBox";
-            UsernameTextBox.Size = new Size(428, 23);
-            UsernameTextBox.TabIndex = 0;
+            SetupUsermailTextBox.Location = new Point(6, 22);
+            SetupUsermailTextBox.Name = "SetupUsermailTextBox";
+            SetupUsermailTextBox.PlaceholderText = "Enter your mail";
+            SetupUsermailTextBox.Size = new Size(428, 23);
+            SetupUsermailTextBox.TabIndex = 0;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(BaseUrlTextBox);
+            groupBox1.Controls.Add(SetupBaseUrlTextBox);
             groupBox1.Location = new Point(6, 6);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(440, 60);
@@ -234,87 +324,13 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "BaseURL";
             // 
-            // BaseUrlTextBox
+            // SetupBaseUrlTextBox
             // 
-            BaseUrlTextBox.Location = new Point(6, 22);
-            BaseUrlTextBox.Name = "BaseUrlTextBox";
-            BaseUrlTextBox.Size = new Size(428, 23);
-            BaseUrlTextBox.TabIndex = 0;
-            // 
-            // groupBox4
-            // 
-            groupBox4.Controls.Add(splitContainer1);
-            groupBox4.Controls.Add(AuthenticationNameTextBox);
-            groupBox4.Controls.Add(AuthenticationEmailTextBox);
-            groupBox4.Location = new Point(6, 157);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(440, 246);
-            groupBox4.TabIndex = 1;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Additional authentication data";
-            // 
-            // AuthenticationEmailTextBox
-            // 
-            AuthenticationEmailTextBox.Location = new Point(6, 22);
-            AuthenticationEmailTextBox.Name = "AuthenticationEmailTextBox";
-            AuthenticationEmailTextBox.PlaceholderText = "Enter your email adress";
-            AuthenticationEmailTextBox.Size = new Size(428, 23);
-            AuthenticationEmailTextBox.TabIndex = 0;
-            // 
-            // AuthenticationNameTextBox
-            // 
-            AuthenticationNameTextBox.Location = new Point(6, 51);
-            AuthenticationNameTextBox.Name = "AuthenticationNameTextBox";
-            AuthenticationNameTextBox.PlaceholderText = "Enter your name";
-            AuthenticationNameTextBox.Size = new Size(428, 23);
-            AuthenticationNameTextBox.TabIndex = 1;
-            // 
-            // splitContainer1
-            // 
-            splitContainer1.Location = new Point(6, 80);
-            splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(AuthenticationAvatarBox);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.Controls.Add(AuthenticationDeletePictureButton);
-            splitContainer1.Panel2.Controls.Add(AuthenticationUploadPictureButton);
-            splitContainer1.Size = new Size(428, 160);
-            splitContainer1.SplitterDistance = 131;
-            splitContainer1.TabIndex = 2;
-            // 
-            // AuthenticationAvatarBox
-            // 
-            AuthenticationAvatarBox.Dock = DockStyle.Fill;
-            AuthenticationAvatarBox.Location = new Point(0, 0);
-            AuthenticationAvatarBox.Name = "AuthenticationAvatarBox";
-            AuthenticationAvatarBox.Size = new Size(131, 160);
-            AuthenticationAvatarBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            AuthenticationAvatarBox.TabIndex = 0;
-            AuthenticationAvatarBox.TabStop = false;
-            // 
-            // AuthenticationUploadPictureButton
-            // 
-            AuthenticationUploadPictureButton.Location = new Point(3, 3);
-            AuthenticationUploadPictureButton.Name = "AuthenticationUploadPictureButton";
-            AuthenticationUploadPictureButton.Size = new Size(287, 23);
-            AuthenticationUploadPictureButton.TabIndex = 0;
-            AuthenticationUploadPictureButton.Text = "Upload picture";
-            AuthenticationUploadPictureButton.UseVisualStyleBackColor = true;
-            AuthenticationUploadPictureButton.Click += AuthenticationUploadPictureButton_Click;
-            // 
-            // AuthenticationDeletePictureButton
-            // 
-            AuthenticationDeletePictureButton.Location = new Point(3, 32);
-            AuthenticationDeletePictureButton.Name = "AuthenticationDeletePictureButton";
-            AuthenticationDeletePictureButton.Size = new Size(287, 23);
-            AuthenticationDeletePictureButton.TabIndex = 1;
-            AuthenticationDeletePictureButton.Text = "Delete picture";
-            AuthenticationDeletePictureButton.UseVisualStyleBackColor = true;
-            AuthenticationDeletePictureButton.Click += AuthenticationDeletePictureButton_Click;
+            SetupBaseUrlTextBox.Location = new Point(6, 22);
+            SetupBaseUrlTextBox.Name = "SetupBaseUrlTextBox";
+            SetupBaseUrlTextBox.PlaceholderText = "Enter your base url";
+            SetupBaseUrlTextBox.Size = new Size(428, 23);
+            SetupBaseUrlTextBox.TabIndex = 0;
             // 
             // Welcome
             // 
@@ -330,12 +346,6 @@
             TabBar.ResumeLayout(false);
             WelcomeTab.ResumeLayout(false);
             AuthenticationTab.ResumeLayout(false);
-            groupBox3.ResumeLayout(false);
-            SetupTab.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
@@ -343,6 +353,12 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AuthenticationAvatarBox).EndInit();
+            groupBox3.ResumeLayout(false);
+            SetupTab.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -355,10 +371,10 @@
         private TabPage SetupTab;
         private RichTextBox StatusTextBox;
         private GroupBox groupBox1;
-        private TextBox BaseUrlTextBox;
+        private TextBox SetupBaseUrlTextBox;
         private GroupBox groupBox2;
-        private TextBox UsernameTextBox;
-        private TextBox PasswordTextBox;
+        private TextBox SetupUsermailTextBox;
+        private TextBox SetupPasswordTextBox;
         private GroupBox groupBox3;
         private Button AuthenticationRegisterUserButton;
         private Button AuthenticationLoginUserButton;
@@ -366,11 +382,12 @@
         private Button AuthenticationUpdateUserButton;
         private Button SetupDeleteSavedButton;
         private GroupBox groupBox4;
-        private TextBox AuthenticationEmailTextBox;
+        private TextBox AuthenticationUsernameTextBox;
         private TextBox AuthenticationNameTextBox;
         private SplitContainer splitContainer1;
         private PictureBox AuthenticationAvatarBox;
         private Button AuthenticationDeletePictureButton;
         private Button AuthenticationUploadPictureButton;
+        private Button SetupSaveDataButton;
     }
 }
