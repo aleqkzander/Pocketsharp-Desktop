@@ -1,13 +1,101 @@
+using Pocketsharp_Desktop.Objects;
+using Pocketsharp_Desktop.Utility;
+
 namespace Pocketsharp_Desktop
 {
     public partial class Welcome : Form
     {
+        HttpClient _client = new();
+        UserData _userData = JsonHandler.ConvertJsonStringToUserData(Properties.Settings.Default.JsonUserData);
+
         public Welcome()
         {
             InitializeComponent();
+
+            TabBar.SelectedIndexChanged += TabBar_OnIndexChanged;
+            BaseUrlTextBox.KeyUp += BaseUrlTextBox_OnEnterPressed;
+            UsernameTextBox.KeyUp += UsernameTextBox_OnEnterPressed;
+            PasswordTextBox.KeyUp += PasswordTextBox_OnEnterPressed;
         }
 
         private void Welcome_Load(object sender, EventArgs e)
+        {
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
+        }
+
+        private void TabBar_OnIndexChanged(object? sender, EventArgs e)
+        {
+            // allow the user to enter the welcome tab at anytime
+            if (TabBar.SelectedTab == WelcomeTab) return;
+
+            // check if the user has provided all required information otherwise redirect to the setup tab
+            if (_userData?.Validated == false)
+                TabBar.SelectTab(SetupTab);
+        }
+
+        private void BaseUrlTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(BaseUrlTextBox.Text)) return;
+            _userData.BaseUrl = BaseUrlTextBox.Text;
+
+            // setup the base url
+            _client.BaseAddress = new Uri(_userData.BaseUrl);
+            
+            Properties.Settings.Default.Save();
+
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
+        }
+
+        private void UsernameTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(UsernameTextBox.Text)) return;
+            _userData.Username = UsernameTextBox.Text;
+            Properties.Settings.Default.Save();
+
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
+        }
+
+        private void PasswordTextBox_OnEnterPressed(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter || string.IsNullOrEmpty(PasswordTextBox.Text)) return;
+            _userData.Password = PasswordTextBox.Text;
+            Properties.Settings.Default.Save();
+
+            _userData.Validate(StatusTextBox, BaseUrlTextBox, UsernameTextBox, PasswordTextBox);
+        }
+
+        private void SetupDeleteSavedButton_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            MessageBox.Show("Your data was deleted. Please restart the application.");
+            Application.Exit();
+        }
+
+        private void AuthenticationRegisterUserButton_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void AuthenticationLoginUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationUpdateUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationDeleteUserButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationUploadPictureButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AuthenticationDeletePictureButton_Click(object sender, EventArgs e)
         {
 
         }
