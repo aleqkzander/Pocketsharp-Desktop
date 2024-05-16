@@ -4,14 +4,12 @@ namespace Pocketsharp_Desktop.Objects
 {
     internal class UserData
     {
-        public string? BaseUrl { get; set; }
-        public string? Username { get; set; }
-        public string? Password { get; set; }
-        public string? JsonAuthRecord { get; set; }
-        public string? JsonAuthResponse { get; set; }
-        public bool Validated { get; set; }
-
-        public UserData() { }
+        public string BaseUrl { get; set; } = string.Empty;
+        public string Usermail { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string JsonAuthRecord { get; set; } = string.Empty;
+        public string JsonAuthResponse { get; set; } = string.Empty;
+        public bool Validated { get; set; } = false;
 
         public void Validate(RichTextBox StatusTextBox, TextBox BaseUrlTextBox, TextBox UsernameTextBox, TextBox PasswordTextBox)
         {
@@ -23,10 +21,10 @@ namespace Pocketsharp_Desktop.Objects
                 TextBoxUtility.SetupTextBox(BaseUrlTextBox, "Enter your base url", BaseUrl);
             }
 
-            if (string.IsNullOrEmpty(Username))
+            if (string.IsNullOrEmpty(Usermail))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a username in the setup tab");
-                TextBoxUtility.SetupTextBox(UsernameTextBox, "Enter your username", Username);
+                TextBoxUtility.SetupTextBox(UsernameTextBox, "Enter your username", Usermail);
             }
 
             if (string.IsNullOrEmpty(Password))
