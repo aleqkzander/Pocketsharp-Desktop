@@ -1,6 +1,5 @@
 using Pocketsharp_Desktop.Objects;
 using Pocketsharp_Desktop.Utility;
-using System.Collections;
 
 namespace Pocketsharp_Desktop
 {
@@ -77,8 +76,11 @@ namespace Pocketsharp_Desktop
 
                 string? jsonResponseObject = await Pocketsharp.Authentication.EmailAndPassword.RegisterAsync(_httpClient, _userData.Record, _userData.Password, _userData.Password);
 
-                if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
-                    ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
+                if (string.IsNullOrEmpty(jsonResponseObject) == false)
+                {
+                    if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
+                        ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
+                }
             }
             catch (Exception exception)
             {
