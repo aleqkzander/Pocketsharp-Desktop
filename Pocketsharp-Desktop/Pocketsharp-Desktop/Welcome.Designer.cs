@@ -270,17 +270,17 @@
             // 
             SetupSaveDataButton.Location = new Point(6, 380);
             SetupSaveDataButton.Name = "SetupSaveDataButton";
-            SetupSaveDataButton.Size = new Size(129, 23);
+            SetupSaveDataButton.Size = new Size(139, 23);
             SetupSaveDataButton.TabIndex = 3;
-            SetupSaveDataButton.Text = "Save current data";
+            SetupSaveDataButton.Text = "Save and validate data";
             SetupSaveDataButton.UseVisualStyleBackColor = true;
             SetupSaveDataButton.Click += SetupSaveDataButton_Click;
             // 
             // SetupDeleteSavedButton
             // 
-            SetupDeleteSavedButton.Location = new Point(317, 380);
+            SetupDeleteSavedButton.Location = new Point(307, 380);
             SetupDeleteSavedButton.Name = "SetupDeleteSavedButton";
-            SetupDeleteSavedButton.Size = new Size(129, 23);
+            SetupDeleteSavedButton.Size = new Size(139, 23);
             SetupDeleteSavedButton.TabIndex = 2;
             SetupDeleteSavedButton.Text = "Delete saved data";
             SetupDeleteSavedButton.UseVisualStyleBackColor = true;

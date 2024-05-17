@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Pocketsharp">
+      <HintPath>..\..\..\Pocketsharp\Pocketsharp\bin\Debug\net8.0\Pocketsharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>

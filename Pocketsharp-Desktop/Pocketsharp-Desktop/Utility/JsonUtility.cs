@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Pocketsharp_Desktop.Utility
 {
-    internal class JsonHandler
+    internal class JsonUtility
     {
         public static string ConvertUserDataToJsonString(UserData userdata)
         {

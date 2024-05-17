@@ -1,14 +1,14 @@
 ﻿using Pocketsharp_Desktop.Utility;
+using Pocketsharp.Objects;
 
 namespace Pocketsharp_Desktop.Objects
 {
     internal class UserData
     {
         public string BaseUrl { get; set; } = string.Empty;
-        public string Usermail { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string JsonAuthRecord { get; set; } = string.Empty;
-        public string JsonAuthResponse { get; set; } = string.Empty;
+        public Record Record { get; set; } = new();
+        public Response Response { get; set; } = new();
         public bool Validated { get; set; } = false;
 
         public void Validate(RichTextBox StatusTextBox, TextBox BaseUrlTextBox, TextBox UsermailTextBox, TextBox PasswordTextBox)
@@ -21,10 +21,10 @@ namespace Pocketsharp_Desktop.Objects
                 TextBoxUtility.SetupTextBox(BaseUrlTextBox, "Enter your base url", BaseUrl);
             }
 
-            if (string.IsNullOrEmpty(Usermail))
+            if (string.IsNullOrEmpty(Record.Email))
             {
-                TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup a usermail in the setup tab");
-                TextBoxUtility.SetupTextBox(UsermailTextBox, "Enter your mail", Usermail);
+                TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup your email in the setup tab");
+                TextBoxUtility.SetupTextBox(UsermailTextBox, "Enter your mail", Record.Email);
             }
 
             if (string.IsNullOrEmpty(Password))
@@ -37,14 +37,14 @@ namespace Pocketsharp_Desktop.Objects
             // from this point on all required information was provided
             Validated = true;
 
-            if (string.IsNullOrEmpty(JsonAuthRecord))
+            if (string.IsNullOrEmpty(Record.Email))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Register a new user");
                 TextBoxUtility.AddINFOEntry(StatusTextBox, "No auth record found");
                 return;
             }
 
-            if (string.IsNullOrEmpty(JsonAuthResponse))
+            if (string.IsNullOrEmpty(Response.Record.Email))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Login is required");
                 TextBoxUtility.AddINFOEntry(StatusTextBox, "No auth response found");
