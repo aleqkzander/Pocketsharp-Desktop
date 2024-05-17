@@ -23,11 +23,24 @@ namespace Pocketsharp_Desktop
 
             SetupUsermailTextBox.Text = _userData.Record.Email;
             SetupPasswordTextBox.Text = _userData.Password;
-            AuthenticationUsernameTextBox.Text = _userData.Record.Username;
-            AuthenticationNameTextBox.Text += _userData.Record.Name;
+
+            if (!string.IsNullOrEmpty(_userData.Record.Username))
+                AuthenticationUsernameTextBox.Text = _userData.Record.Username;
+
+            else if (!string.IsNullOrEmpty(_userData.Response.Record.Username))
+                AuthenticationUsernameTextBox.Text = _userData.Response.Record.Username;
+
+            if (!string.IsNullOrEmpty(_userData.Record.Name))
+                AuthenticationNameTextBox.Text = _userData.Record.Name;
+
+            else if (!string.IsNullOrEmpty(_userData.Response.Record.Name))
+                AuthenticationNameTextBox.Text = _userData.Response.Record.Name;
 
             if (_userData.Record.Avatar.Length != 0)
-                AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(_userData.Record.Avatar);
+                AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(_userData.Record.AvatarByte);
+
+            else if (_userData.Response.Record.Avatar.Length != 0)
+                AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(_userData.Response.Record.AvatarByte);
 
             _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
         }
@@ -72,11 +85,12 @@ namespace Pocketsharp_Desktop
                 _userData.Record.Name = AuthenticationNameTextBox.Text;
 
                 if (AuthenticationAvatarBox.Image != null)
-                    _userData.Record.Avatar = ImageUtility.ImageToByteArray(AuthenticationAvatarBox.Image);
+                    _userData.Record.AvatarByte = ImageUtility.ImageToByteArray(AuthenticationAvatarBox.Image);
 
-                string? jsonResponseObject = await Pocketsharp.Authentication.EmailAndPassword.RegisterAsync(_httpClient, _userData.Record, _userData.Password, _userData.Password);
+                string? jsonRecordObject = 
+                    await Pocketsharp.Authentication.EmailAndPassword.RegisterAsync(_httpClient, _userData.Record, _userData.Password, _userData.Password);
 
-                if (string.IsNullOrEmpty(jsonResponseObject) == false)
+                if (string.IsNullOrEmpty(jsonRecordObject) == false)
                 {
                     if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
                         ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
@@ -89,9 +103,38 @@ namespace Pocketsharp_Desktop
             }
         }
 
-        private void AuthenticationLoginUserButton_Click(object sender, EventArgs e)
+        private async void AuthenticationLoginUserButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string? jsonResponseObject = await Pocketsharp.Authentication.EmailAndPassword.LoginAsync(_httpClient, _userData.Record.Email, _userData.Password);
 
+                if (string.IsNullOrEmpty(jsonResponseObject) == false)
+                {
+                    Pocketsharp.Objects.Response? response = Pocketsharp.Utility.JsonUtility.DeserializeJsonToResponse(jsonResponseObject);
+                    byte[]? byteAvatar = await Pocketsharp.Authentication.User.DownloadAvatar(_httpClient, response, response.Record.Avatar);
+
+                    if (byteAvatar.Length > 0)
+                    {
+                        response.Record.AvatarByte = byteAvatar;
+                        AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(response.Record.AvatarByte);
+                    }
+
+                    _userData.Response = response;
+
+                    if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
+                        ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
+                }
+                else
+                {
+                    MessageBox.Show("You had a login problem");
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                Clipboard.SetText(exception.ToString());
+            }
         }
 
         private void AuthenticationUpdateUserButton_Click(object sender, EventArgs e)
