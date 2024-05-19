@@ -90,10 +90,29 @@ namespace Pocketsharp_Desktop
                 string? jsonRecordObject = 
                     await Pocketsharp.Authentication.EmailAndPassword.RegisterAsync(_httpClient, _userData.Record, _userData.Password, _userData.Password);
 
+                // that request was successfull so we overwrite the exsiting data
                 if (string.IsNullOrEmpty(jsonRecordObject) == false)
                 {
-                    if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
-                        ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
+                    // run the login
+                    string? jsonResponseObject = await Pocketsharp.Authentication.EmailAndPassword.LoginAsync(_httpClient, _userData.Record.Email, _userData.Password);
+
+                    // that request was successfull so we overwrite the exsiting data
+                    if (string.IsNullOrEmpty(jsonResponseObject) == false)
+                    {
+                        Pocketsharp.Objects.Response? response = Pocketsharp.Utility.JsonUtility.DeserializeJsonToResponse(jsonResponseObject);
+                        byte[]? byteAvatar = await Pocketsharp.Authentication.User.DownloadAvatar(_httpClient, response, response.Record.Avatar);
+
+                        if (byteAvatar.Length > 0)
+                        {
+                            response.Record.AvatarByte = byteAvatar;
+                            AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(response.Record.AvatarByte);
+                        }
+
+                        _userData.Response = response;
+
+                        if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
+                            ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
+                    }
                 }
             }
             catch (Exception exception)
@@ -109,6 +128,7 @@ namespace Pocketsharp_Desktop
             {
                 string? jsonResponseObject = await Pocketsharp.Authentication.EmailAndPassword.LoginAsync(_httpClient, _userData.Record.Email, _userData.Password);
 
+                // that request was successfull so we overwrite the exsiting data
                 if (string.IsNullOrEmpty(jsonResponseObject) == false)
                 {
                     Pocketsharp.Objects.Response? response = Pocketsharp.Utility.JsonUtility.DeserializeJsonToResponse(jsonResponseObject);
@@ -125,10 +145,6 @@ namespace Pocketsharp_Desktop
                     if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
                         ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
                 }
-                else
-                {
-                    MessageBox.Show("You had a login problem");
-                }
             }
             catch (Exception exception)
             {
@@ -137,9 +153,43 @@ namespace Pocketsharp_Desktop
             }
         }
 
-        private void AuthenticationUpdateUserButton_Click(object sender, EventArgs e)
+        private async void AuthenticationUpdateUserButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                _userData.Response.Record.Username = AuthenticationUsernameTextBox.Text;
+                _userData.Response.Record.Email = SetupUsermailTextBox.Text;
+                _userData.Response.Record.Name = AuthenticationNameTextBox.Text;
 
+                if (AuthenticationAvatarBox.Image != null)
+                    _userData.Response.Record.AvatarByte = ImageUtility.ImageToByteArray(AuthenticationAvatarBox.Image);
+
+                string? jsonUpdateResponseObject = 
+                    await Pocketsharp.Authentication.User.UpdateAsync(_httpClient, _userData.Response, null, null, null);
+
+                // that request was successfull so we overwrite the exsiting data
+                if (string.IsNullOrEmpty(jsonUpdateResponseObject) == false)
+                {
+                    Pocketsharp.Objects.Response? response = Pocketsharp.Utility.JsonUtility.DeserializeJsonToResponse(jsonUpdateResponseObject);
+                    byte[]? byteAvatar = await Pocketsharp.Authentication.User.DownloadAvatar(_httpClient, response, response.Record.Avatar);
+
+                    if (byteAvatar.Length > 0)
+                    {
+                        response.Record.AvatarByte = byteAvatar;
+                        AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(response.Record.AvatarByte);
+                    }
+
+                    _userData.Response = response;
+
+                    if (DialogUtility.ShowYesNoDialog("Do you wan't to overwrite the new record?", "Info"))
+                        ConfigUtility.Save(JsonUtility.ConvertUserDataToJsonString(_userData));
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                Clipboard.SetText(exception.ToString());
+            }
         }
 
         private void AuthenticationDeleteUserButton_Click(object sender, EventArgs e)
