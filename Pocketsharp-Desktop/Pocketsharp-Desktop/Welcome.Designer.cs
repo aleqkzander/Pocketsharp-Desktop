@@ -365,6 +365,7 @@
             CollectionCreateEntryButton.TabIndex = 0;
             CollectionCreateEntryButton.Text = "Create new entry";
             CollectionCreateEntryButton.UseVisualStyleBackColor = true;
+            CollectionCreateEntryButton.Click += CollectionCreateEntryButton_Click;
             // 
             // CollectionGetAllEntrysButton
             // 
@@ -374,6 +375,7 @@
             CollectionGetAllEntrysButton.TabIndex = 1;
             CollectionGetAllEntrysButton.Text = "Get all entrys";
             CollectionGetAllEntrysButton.UseVisualStyleBackColor = true;
+            CollectionGetAllEntrysButton.Click += CollectionGetAllEntrysButton_Click;
             // 
             // CollectionGetSingleEntryButton
             // 
@@ -383,6 +385,7 @@
             CollectionGetSingleEntryButton.TabIndex = 2;
             CollectionGetSingleEntryButton.Text = "Get single entry";
             CollectionGetSingleEntryButton.UseVisualStyleBackColor = true;
+            CollectionGetSingleEntryButton.Click += CollectionGetSingleEntryButton_Click;
             // 
             // CollectionTargetCollectionTextBox
             // 

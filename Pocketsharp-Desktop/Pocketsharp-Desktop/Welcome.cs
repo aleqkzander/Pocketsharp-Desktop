@@ -86,7 +86,7 @@ namespace Pocketsharp_Desktop
 
                 if (string.IsNullOrEmpty(jsonRecordObject) == false)
                 {
-                    Pocketsharp.Objects.Response? loginResponse = await MethodUtility.Login(_httpClient, userRecord.Email, _userData.Password, AuthenticationAvatarBox) 
+                    Pocketsharp.Objects.Response? loginResponse = await MethodUtility.Login(_httpClient, userRecord.Email, _userData.Password, AuthenticationAvatarBox)
                         ?? throw new NotImplementedException();
 
                     _userData.Response = loginResponse;
@@ -133,7 +133,7 @@ namespace Pocketsharp_Desktop
                 if (AuthenticationAvatarBox.Image != null)
                     _userData.Response.Record.AvatarByte = ImageUtility.ImageToByteArray(AuthenticationAvatarBox.Image);
 
-                string? jsonUpdateResponseObject = 
+                string? jsonUpdateResponseObject =
                     await Pocketsharp.User.UpdateAsync(_httpClient, _userData.Response, null, null, null);
 
                 // that request was successfull so we overwrite the exsiting data
@@ -203,6 +203,21 @@ namespace Pocketsharp_Desktop
         private void AuthenticationDeletePictureButton_Click(object sender, EventArgs e)
         {
             AuthenticationAvatarBox.Image = null;
+        }
+
+        private void CollectionCreateEntryButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CollectionGetAllEntrysButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CollectionGetSingleEntryButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
