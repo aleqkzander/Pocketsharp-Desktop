@@ -8,7 +8,7 @@
             if (jsonResponseObject == string.Empty) throw new NotImplementedException();
 
             Pocketsharp.Objects.Response? response = Pocketsharp.Utility.JsonUtility.DeserializeJsonToResponse(jsonResponseObject) ?? throw new NotImplementedException();
-            byte[]? byteAvatar = await Pocketsharp.Authentication.User.DownloadAvatar(httpClient, response, response.Record.Avatar);
+            byte[]? byteAvatar = await Pocketsharp.User.DownloadAvatar(httpClient, response, response.Record.Avatar);
 
             response!.Record.AvatarByte = byteAvatar;
             imagebox.Image = ImageUtility.ByteArrayToImage(response.Record.AvatarByte);
