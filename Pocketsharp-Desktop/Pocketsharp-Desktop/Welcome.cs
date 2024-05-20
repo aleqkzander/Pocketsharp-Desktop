@@ -1,6 +1,5 @@
 using Pocketsharp_Desktop.Objects;
 using Pocketsharp_Desktop.Utility;
-using System.Text.Json;
 
 namespace Pocketsharp_Desktop
 {
@@ -291,6 +290,9 @@ namespace Pocketsharp_Desktop
                 MessageBox.Show(exception.ToString());
                 Clipboard.SetText(exception.ToString());
             }
+
+            Pocketsharp.Objects.Record record = new();
+            Pocketsharp.Objects.Response response = new();
         }
     }
 }
