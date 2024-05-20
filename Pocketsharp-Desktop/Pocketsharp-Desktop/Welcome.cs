@@ -27,19 +27,10 @@ namespace Pocketsharp_Desktop
             if (!string.IsNullOrEmpty(_userData.Response.Record.Username))
                 AuthenticationUsernameTextBox.Text = _userData.Response.Record.Username;
 
-            else if (!string.IsNullOrEmpty(_userData.Response.Record.Username))
-                AuthenticationUsernameTextBox.Text = _userData.Response.Record.Username;
-
             if (!string.IsNullOrEmpty(_userData.Response.Record.Name))
                 AuthenticationNameTextBox.Text = _userData.Response.Record.Name;
 
-            else if (!string.IsNullOrEmpty(_userData.Response.Record.Name))
-                AuthenticationNameTextBox.Text = _userData.Response.Record.Name;
-
-            if (_userData.Response.Record.Avatar.Length != 0)
-                AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(_userData.Response.Record.AvatarByte);
-
-            else if (_userData.Response.Record.Avatar.Length != 0)
+            if (_userData.Response.Record.AvatarFilename != string.Empty)
                 AuthenticationAvatarBox.Image = ImageUtility.ByteArrayToImage(_userData.Response.Record.AvatarByte);
 
             _userData.Validate(StatusTextBox, SetupBaseUrlTextBox, SetupUsermailTextBox, SetupPasswordTextBox);
@@ -83,6 +74,7 @@ namespace Pocketsharp_Desktop
             {
                 Pocketsharp.Objects.Record userRecord = new()
                 {
+                    Email = _userData.Response.Record.Email,
                     Username = AuthenticationUsernameTextBox.Text,
                     Name = AuthenticationNameTextBox.Text
                 };
