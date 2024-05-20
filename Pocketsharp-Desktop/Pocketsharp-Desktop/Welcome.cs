@@ -290,9 +290,6 @@ namespace Pocketsharp_Desktop
                 MessageBox.Show(exception.ToString());
                 Clipboard.SetText(exception.ToString());
             }
-
-            Pocketsharp.Objects.Record record = new();
-            Pocketsharp.Objects.Response response = new();
         }
     }
 }
