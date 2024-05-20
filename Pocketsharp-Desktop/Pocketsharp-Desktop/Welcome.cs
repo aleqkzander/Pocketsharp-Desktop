@@ -142,7 +142,7 @@ namespace Pocketsharp_Desktop
                     _userData.Response.Record.AvatarByte = ImageUtility.ImageToByteArray(AuthenticationAvatarBox.Image);
 
                 string? jsonUpdateResponseObject = 
-                    await Pocketsharp.Authentication.User.UpdateAsync(_httpClient, _userData.Response, null, null, null);
+                    await Pocketsharp.User.UpdateAsync(_httpClient, _userData.Response, null, null, null);
 
                 // that request was successfull so we overwrite the exsiting data
                 if (string.IsNullOrEmpty(jsonUpdateResponseObject) == false)
@@ -167,7 +167,7 @@ namespace Pocketsharp_Desktop
         {
             try
             {
-                bool deletationRequest = await Pocketsharp.Authentication.User.DeleteAsync(_httpClient, _userData.Response.Record.Id, _userData.Response.Token);
+                bool deletationRequest = await Pocketsharp.User.DeleteAsync(_httpClient, _userData.Response.Record.Id, _userData.Response.Token);
 
                 if (deletationRequest == true)
                 {
