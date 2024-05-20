@@ -7,7 +7,6 @@ namespace Pocketsharp_Desktop.Objects
     {
         public string BaseUrl { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public Record Record { get; set; } = new();
         public Response Response { get; set; } = new();
         public bool Validated { get; set; } = false;
 
@@ -21,10 +20,10 @@ namespace Pocketsharp_Desktop.Objects
                 TextBoxUtility.SetupTextBox(BaseUrlTextBox, "Enter your base url", BaseUrl);
             }
 
-            if (string.IsNullOrEmpty(Record.Email))
+            if (string.IsNullOrEmpty(Response.Record.Email))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Setup your email in the setup tab");
-                TextBoxUtility.SetupTextBox(UsermailTextBox, "Enter your mail", Record.Email);
+                TextBoxUtility.SetupTextBox(UsermailTextBox, "Enter your mail", Response.Record.Email);
             }
 
             if (string.IsNullOrEmpty(Password))
@@ -37,7 +36,7 @@ namespace Pocketsharp_Desktop.Objects
             // from this point on all required information was provided
             Validated = true;
 
-            if (string.IsNullOrEmpty(Record.Email))
+            if (string.IsNullOrEmpty(Response.Record.Email))
             {
                 TextBoxUtility.AddTODOEntry(StatusTextBox, "Register a new user");
                 TextBoxUtility.AddINFOEntry(StatusTextBox, "No auth record found");
