@@ -1,2 +1,4 @@
 # Pocketsharp-Desktop
- Pocketsharp test application using .NET 8.0
+This is a test project for the Pocketsharp library
+
+- https://github.com/aleqkzander/Pocketsharp
