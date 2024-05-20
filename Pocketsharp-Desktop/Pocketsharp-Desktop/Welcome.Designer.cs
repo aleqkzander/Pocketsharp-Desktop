@@ -45,6 +45,14 @@
             AuthenticationLoginUserButton = new Button();
             AuthenticationRegisterUserButton = new Button();
             CollectionTab = new TabPage();
+            CollectionResponseTextBox = new RichTextBox();
+            groupBox5 = new GroupBox();
+            CollectionMessageTextBox = new TextBox();
+            CollectionEntryIdTextBox = new TextBox();
+            CollectionTargetCollectionTextBox = new TextBox();
+            CollectionGetSingleEntryButton = new Button();
+            CollectionGetAllEntrysButton = new Button();
+            CollectionCreateEntryButton = new Button();
             SetupTab = new TabPage();
             SetupSaveDataButton = new Button();
             SetupDeleteSavedButton = new Button();
@@ -53,13 +61,6 @@
             SetupUsermailTextBox = new TextBox();
             groupBox1 = new GroupBox();
             SetupBaseUrlTextBox = new TextBox();
-            groupBox5 = new GroupBox();
-            CollectionCreateEntryButton = new Button();
-            CollectionGetAllEntrysButton = new Button();
-            CollectionGetSingleEntryButton = new Button();
-            CollectionTargetCollectionTextBox = new TextBox();
-            CollectionEntryIdTextBox = new TextBox();
-            CollectionResponseTextBox = new RichTextBox();
             TabBar.SuspendLayout();
             WelcomeTab.SuspendLayout();
             AuthenticationTab.SuspendLayout();
@@ -71,10 +72,10 @@
             ((System.ComponentModel.ISupportInitialize)AuthenticationAvatarBox).BeginInit();
             groupBox3.SuspendLayout();
             CollectionTab.SuspendLayout();
+            groupBox5.SuspendLayout();
             SetupTab.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
-            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
             // TabBar
@@ -263,6 +264,85 @@
             CollectionTab.Text = "Collection";
             CollectionTab.UseVisualStyleBackColor = true;
             // 
+            // CollectionResponseTextBox
+            // 
+            CollectionResponseTextBox.BorderStyle = BorderStyle.FixedSingle;
+            CollectionResponseTextBox.Location = new Point(6, 212);
+            CollectionResponseTextBox.Name = "CollectionResponseTextBox";
+            CollectionResponseTextBox.ReadOnly = true;
+            CollectionResponseTextBox.Size = new Size(440, 191);
+            CollectionResponseTextBox.TabIndex = 3;
+            CollectionResponseTextBox.Text = "";
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(CollectionMessageTextBox);
+            groupBox5.Controls.Add(CollectionEntryIdTextBox);
+            groupBox5.Controls.Add(CollectionTargetCollectionTextBox);
+            groupBox5.Controls.Add(CollectionGetSingleEntryButton);
+            groupBox5.Controls.Add(CollectionGetAllEntrysButton);
+            groupBox5.Controls.Add(CollectionCreateEntryButton);
+            groupBox5.Location = new Point(6, 6);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(440, 200);
+            groupBox5.TabIndex = 0;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Control";
+            // 
+            // CollectionMessageTextBox
+            // 
+            CollectionMessageTextBox.Location = new Point(6, 167);
+            CollectionMessageTextBox.Name = "CollectionMessageTextBox";
+            CollectionMessageTextBox.PlaceholderText = "Message";
+            CollectionMessageTextBox.Size = new Size(428, 23);
+            CollectionMessageTextBox.TabIndex = 5;
+            // 
+            // CollectionEntryIdTextBox
+            // 
+            CollectionEntryIdTextBox.Location = new Point(6, 138);
+            CollectionEntryIdTextBox.Name = "CollectionEntryIdTextBox";
+            CollectionEntryIdTextBox.PlaceholderText = "Provide a valid entry id";
+            CollectionEntryIdTextBox.Size = new Size(428, 23);
+            CollectionEntryIdTextBox.TabIndex = 4;
+            // 
+            // CollectionTargetCollectionTextBox
+            // 
+            CollectionTargetCollectionTextBox.Location = new Point(6, 109);
+            CollectionTargetCollectionTextBox.Name = "CollectionTargetCollectionTextBox";
+            CollectionTargetCollectionTextBox.PlaceholderText = "Provide a valid collection";
+            CollectionTargetCollectionTextBox.Size = new Size(428, 23);
+            CollectionTargetCollectionTextBox.TabIndex = 3;
+            // 
+            // CollectionGetSingleEntryButton
+            // 
+            CollectionGetSingleEntryButton.Location = new Point(6, 80);
+            CollectionGetSingleEntryButton.Name = "CollectionGetSingleEntryButton";
+            CollectionGetSingleEntryButton.Size = new Size(428, 23);
+            CollectionGetSingleEntryButton.TabIndex = 2;
+            CollectionGetSingleEntryButton.Text = "Get single entry";
+            CollectionGetSingleEntryButton.UseVisualStyleBackColor = true;
+            CollectionGetSingleEntryButton.Click += CollectionGetSingleEntryButton_Click;
+            // 
+            // CollectionGetAllEntrysButton
+            // 
+            CollectionGetAllEntrysButton.Location = new Point(6, 51);
+            CollectionGetAllEntrysButton.Name = "CollectionGetAllEntrysButton";
+            CollectionGetAllEntrysButton.Size = new Size(428, 23);
+            CollectionGetAllEntrysButton.TabIndex = 1;
+            CollectionGetAllEntrysButton.Text = "Get all entrys";
+            CollectionGetAllEntrysButton.UseVisualStyleBackColor = true;
+            CollectionGetAllEntrysButton.Click += CollectionGetAllEntrysButton_Click;
+            // 
+            // CollectionCreateEntryButton
+            // 
+            CollectionCreateEntryButton.Location = new Point(6, 22);
+            CollectionCreateEntryButton.Name = "CollectionCreateEntryButton";
+            CollectionCreateEntryButton.Size = new Size(428, 23);
+            CollectionCreateEntryButton.TabIndex = 0;
+            CollectionCreateEntryButton.Text = "Create new entry";
+            CollectionCreateEntryButton.UseVisualStyleBackColor = true;
+            CollectionCreateEntryButton.Click += CollectionCreateEntryButton_Click;
+            // 
             // SetupTab
             // 
             SetupTab.Controls.Add(SetupSaveDataButton);
@@ -343,75 +423,6 @@
             SetupBaseUrlTextBox.Size = new Size(428, 23);
             SetupBaseUrlTextBox.TabIndex = 0;
             // 
-            // groupBox5
-            // 
-            groupBox5.Controls.Add(CollectionEntryIdTextBox);
-            groupBox5.Controls.Add(CollectionTargetCollectionTextBox);
-            groupBox5.Controls.Add(CollectionGetSingleEntryButton);
-            groupBox5.Controls.Add(CollectionGetAllEntrysButton);
-            groupBox5.Controls.Add(CollectionCreateEntryButton);
-            groupBox5.Location = new Point(6, 6);
-            groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(440, 170);
-            groupBox5.TabIndex = 0;
-            groupBox5.TabStop = false;
-            groupBox5.Text = "Control";
-            // 
-            // CollectionCreateEntryButton
-            // 
-            CollectionCreateEntryButton.Location = new Point(6, 22);
-            CollectionCreateEntryButton.Name = "CollectionCreateEntryButton";
-            CollectionCreateEntryButton.Size = new Size(428, 23);
-            CollectionCreateEntryButton.TabIndex = 0;
-            CollectionCreateEntryButton.Text = "Create new entry";
-            CollectionCreateEntryButton.UseVisualStyleBackColor = true;
-            CollectionCreateEntryButton.Click += CollectionCreateEntryButton_Click;
-            // 
-            // CollectionGetAllEntrysButton
-            // 
-            CollectionGetAllEntrysButton.Location = new Point(6, 51);
-            CollectionGetAllEntrysButton.Name = "CollectionGetAllEntrysButton";
-            CollectionGetAllEntrysButton.Size = new Size(428, 23);
-            CollectionGetAllEntrysButton.TabIndex = 1;
-            CollectionGetAllEntrysButton.Text = "Get all entrys";
-            CollectionGetAllEntrysButton.UseVisualStyleBackColor = true;
-            CollectionGetAllEntrysButton.Click += CollectionGetAllEntrysButton_Click;
-            // 
-            // CollectionGetSingleEntryButton
-            // 
-            CollectionGetSingleEntryButton.Location = new Point(6, 80);
-            CollectionGetSingleEntryButton.Name = "CollectionGetSingleEntryButton";
-            CollectionGetSingleEntryButton.Size = new Size(428, 23);
-            CollectionGetSingleEntryButton.TabIndex = 2;
-            CollectionGetSingleEntryButton.Text = "Get single entry";
-            CollectionGetSingleEntryButton.UseVisualStyleBackColor = true;
-            CollectionGetSingleEntryButton.Click += CollectionGetSingleEntryButton_Click;
-            // 
-            // CollectionTargetCollectionTextBox
-            // 
-            CollectionTargetCollectionTextBox.Location = new Point(6, 109);
-            CollectionTargetCollectionTextBox.Name = "CollectionTargetCollectionTextBox";
-            CollectionTargetCollectionTextBox.PlaceholderText = "Traget collection";
-            CollectionTargetCollectionTextBox.Size = new Size(428, 23);
-            CollectionTargetCollectionTextBox.TabIndex = 3;
-            // 
-            // CollectionEntryIdTextBox
-            // 
-            CollectionEntryIdTextBox.Location = new Point(6, 138);
-            CollectionEntryIdTextBox.Name = "CollectionEntryIdTextBox";
-            CollectionEntryIdTextBox.PlaceholderText = "Entry ID";
-            CollectionEntryIdTextBox.Size = new Size(428, 23);
-            CollectionEntryIdTextBox.TabIndex = 4;
-            // 
-            // CollectionResponseTextBox
-            // 
-            CollectionResponseTextBox.BorderStyle = BorderStyle.FixedSingle;
-            CollectionResponseTextBox.Location = new Point(6, 182);
-            CollectionResponseTextBox.Name = "CollectionResponseTextBox";
-            CollectionResponseTextBox.Size = new Size(440, 221);
-            CollectionResponseTextBox.TabIndex = 1;
-            CollectionResponseTextBox.Text = "";
-            // 
             // Welcome
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -435,13 +446,13 @@
             ((System.ComponentModel.ISupportInitialize)AuthenticationAvatarBox).EndInit();
             groupBox3.ResumeLayout(false);
             CollectionTab.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
             SetupTab.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            groupBox5.ResumeLayout(false);
-            groupBox5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -479,5 +490,6 @@
         private TextBox CollectionEntryIdTextBox;
         private TextBox CollectionTargetCollectionTextBox;
         private RichTextBox CollectionResponseTextBox;
+        private TextBox CollectionMessageTextBox;
     }
 }
