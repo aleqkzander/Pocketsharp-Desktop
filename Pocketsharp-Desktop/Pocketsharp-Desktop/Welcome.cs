@@ -1,5 +1,6 @@
 using Pocketsharp_Desktop.Objects;
 using Pocketsharp_Desktop.Utility;
+using System.Text.Json;
 
 namespace Pocketsharp_Desktop
 {
@@ -86,7 +87,7 @@ namespace Pocketsharp_Desktop
 
                 if (string.IsNullOrEmpty(jsonRecordObject) == false)
                 {
-                    Pocketsharp.Objects.Response? loginResponse = await MethodUtility.Login(_httpClient, userRecord.Email, _userData.Password, AuthenticationAvatarBox) 
+                    Pocketsharp.Objects.Response? loginResponse = await MethodUtility.Login(_httpClient, userRecord.Email, _userData.Password, AuthenticationAvatarBox)
                         ?? throw new NotImplementedException();
 
                     _userData.Response = loginResponse;
@@ -133,7 +134,7 @@ namespace Pocketsharp_Desktop
                 if (AuthenticationAvatarBox.Image != null)
                     _userData.Response.Record.AvatarByte = ImageUtility.ImageToByteArray(AuthenticationAvatarBox.Image);
 
-                string? jsonUpdateResponseObject = 
+                string? jsonUpdateResponseObject =
                     await Pocketsharp.User.UpdateAsync(_httpClient, _userData.Response, null, null, null);
 
                 // that request was successfull so we overwrite the exsiting data
@@ -203,6 +204,93 @@ namespace Pocketsharp_Desktop
         private void AuthenticationDeletePictureButton_Click(object sender, EventArgs e)
         {
             AuthenticationAvatarBox.Image = null;
+        }
+
+        private async void CollectionCreateEntryButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CollectionTargetCollectionTextBox.Text == string.Empty)
+                {
+                    MessageBox.Show("Provide a target collection");
+                    return;
+                }
+
+                if (CollectionMessageTextBox.Text == string.Empty)
+                {
+                    MessageBox.Show("Provide a message");
+                    return;
+                }
+
+                UserMessage message = new(_userData.Response.Record.Username, $"{CollectionMessageTextBox.Text}");
+
+                string? entryCreationResponse =
+                    await Pocketsharp.Collection.CreateEntry(_httpClient, _userData.Response.Token, CollectionTargetCollectionTextBox.Text, message);
+
+                if (string.IsNullOrEmpty(entryCreationResponse)) throw new NotImplementedException();
+
+                CollectionResponseTextBox.Clear();
+                CollectionResponseTextBox.Text = entryCreationResponse;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                Clipboard.SetText(exception.ToString());
+            }
+        }
+
+        private async void CollectionGetAllEntrysButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CollectionTargetCollectionTextBox.Text == string.Empty)
+                {
+                    MessageBox.Show("Provide a target collection");
+                    return;
+                }
+
+                var entryCollectionResponse = await Pocketsharp.Collection.GetAllEntrysFromTarget(_httpClient, _userData.Response.Token, CollectionTargetCollectionTextBox.Text)
+                    ?? throw new NotImplementedException();
+
+                CollectionResponseTextBox.Clear();
+                CollectionResponseTextBox.Text = entryCollectionResponse.ToJsonString();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                Clipboard.SetText(exception.ToString());
+            }
+        }
+
+        private async void CollectionGetSingleEntryButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CollectionTargetCollectionTextBox.Text == string.Empty)
+                {
+                    MessageBox.Show("Provide a target collection");
+                    return;
+                }
+
+                if (CollectionEntryIdTextBox.Text == string.Empty)
+                {
+                    MessageBox.Show("Provide a entry id");
+                    return;
+                }
+
+                string? collectionEntryResponse =
+                    await Pocketsharp.Collection.GetSpecificEntryFromTarget(_httpClient, _userData.Response.Token, CollectionTargetCollectionTextBox.Text, CollectionEntryIdTextBox.Text);
+
+                if (string.IsNullOrEmpty(collectionEntryResponse)) throw new NotImplementedException();
+
+                CollectionResponseTextBox.Clear();
+                CollectionResponseTextBox.Text = collectionEntryResponse;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                Clipboard.SetText(exception.ToString());
+            }
         }
     }
 }
