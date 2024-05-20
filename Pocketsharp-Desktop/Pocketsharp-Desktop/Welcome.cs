@@ -163,9 +163,24 @@ namespace Pocketsharp_Desktop
             }
         }
 
-        private void AuthenticationDeleteUserButton_Click(object sender, EventArgs e)
+        private async void AuthenticationDeleteUserButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                bool deletationRequest = await Pocketsharp.Authentication.User.DeleteAsync(_httpClient, _userData.Response.Record.Id, _userData.Response.Token);
 
+                if (deletationRequest == true)
+                {
+                    MessageBox.Show("Your data was deleted successfully. Your savefile will be deleted and the application will be shutdown.");
+                    ConfigUtility.Delete();
+                    Application.Exit();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                Clipboard.SetText(exception.ToString());
+            }
         }
 
         private void AuthenticationUploadPictureButton_Click(object sender, EventArgs e)
